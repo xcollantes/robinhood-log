@@ -21,5 +21,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       }
     })
   }
+  if (request === "history") {
+    console.log("HIOSTORY IN BACKGROUND")
+    chrome.runtime.sendMessage("history", (response) => {})
+  }
   return true
 })

@@ -1,6 +1,6 @@
 /** Interacts with the page assigned in manifest.json.
  *
- * Output to console will appear in the respective browser page.   
+ * Output to console will appear in the respective browser page.
  *
  * This content script can only manipulate the `matches` property of the
  * `content_scripts` field in the manifest.json.
@@ -12,28 +12,42 @@
  */
 
 const graphId = "price-tracker"
-let insertPoint = document.querySelector("#ppd")
+
+let insertPoint = document.querySelector(
+  "#react_root > main > div:nth-child(2) > div > div > div > div > div.main-container > div > div > div.col-12 > section > h2"
+)
+
+// let insertPoint = document.querySelector(
+//   "#react_root > main > div:nth-child(2) > div > div > div > div > div.main-container > div > div > div.col-12"
+// )
 
 if (insertPoint) {
-  insertGraph(insertPoint)
+  console.log("ELMENT")
+  console.log(insertPoint)
 }
+
+console.log("content.js")
+console.log(insertPoint)
+chrome.runtime.sendMessage("history", (response) => {
+  console.log("HISTORY SENT")
+})
 
 /**
  * Waits for the message from `ToolbarButton.js` to scroll to an element if
  * it exists, return string if not found.
  */
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request === "show_graph") {
-    const graphElement = document.getElementById(graphId)
-    if (graphElement) {
-      document.getElementById(graphId).scrollIntoView({ behavior: "smooth" })
-      flashBorder(graphId)
-    } else {
-      sendResponse("no_graph_found")
-    }
-    return true // Always return something
-  }
-})
+// chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+//   if (request === "show_graph") {
+//     const graphElement = document.getElementById(graphId)
+//     if (graphElement) {
+//       document.getElementById(graphId).scrollIntoView({ behavior: "smooth" })
+//       flashBorder(graphId)
+//     } else {
+//       sendResponse("no_graph_found")
+//     }
+//     return true // Always return something
+//   }
+// })
 
 /** Flash a border around the graph for visibility. */
 function flashBorder(graphId) {

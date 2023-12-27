@@ -1,7 +1,7 @@
 {
-  "name": "TODO: Title",
+  "name": "Robinhood trade history extraction",
   "version": "1.0.0",
-  "description": "TODO: Description",
+  "description": "Grab trade history from personal account.",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
